@@ -6,7 +6,7 @@ function doDays(month) {
     var mDays = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     var result = "";
     for(var i=1; i<= mDays[month]; i++){
-        result += "<option value =''" + i + ">" + i + "</option>"
+        result += "<option value =" + i + ">" + i + "</option>"
     }
     document.getElementById("days").innerHTML = result;
 }
@@ -94,15 +94,36 @@ function determineHoroscope(){
 
     if(month == 0){
         document.getElementById("output").innerHTML = "Enter your birthday!"
+    }else if(name == ""){
+        document.getElementById("output").innerHTML = "You are a " + sign + "!";
+    }else{
+        document.getElementById("output").innerHTML = name + ", you are a " + sign + "!";
     }
 
-    document.getElementById("output").innerHTML = name + ", you are a " + sign + "!";
-    document.getElementById("output1").innerHTML = horoscope;
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+
+    if(dd == day && mm == month){
+        document.getElementById("output1").innerHTML = "Happy Birthday, " + name + "!! Today will be amazing! You have the ability to light up a room when you enter it. Others gravitate to you naturally because you are very easy to like. Be sure to share your positivity with others today, it will make this special day even more special!";
+    }else{
+        document.getElementById("output1").innerHTML = horoscope;
+    }
     document.getElementById("image").innerHTML = "<img src='img/" + sign + ".jpg'>";
 
 }
 
+function todayIsBirthday(month, day){
+    var today = new Date();
+    var dd = today.getDay()+5;
+    var mm = today.getMonth()+1;
 
+    if(dd == day && mm == month){
+        document.getElementById("output").innerHTML = "Happy Birthday!";
+        document.getElementById("output1").innerHTML = "Happy Birthday!";
+    }
+
+}
 
 
 
